@@ -77,3 +77,27 @@ resource "aws_s3_object" "bucket_created" {
 
   etag = filemd5("./images/s3_bucket_created.png")
 }
+resource "aws_s3_object" "build_start" {
+  bucket       = aws_s3_bucket.gut-checker-bucket.id
+  key          = "build_start.jpg"
+  source       = "./images/build_start.jpg"
+  content_type = "image/jpeg"
+
+  etag = filemd5("./images/build_start.jpg")
+}
+resource "aws_s3_object" "build_success" {
+  bucket       = aws_s3_bucket.gut-checker-bucket.id
+  key          = "build_success.jpg"
+  source       = "./images/build_success.jpg"
+  content_type = "image/jpeg"
+
+  etag = filemd5("./images/build_success.jpg")
+}
+resource "aws_s3_object" "armageddon_link" {
+  bucket       = aws_s3_bucket.gut-checker-bucket.id
+  key          = "armageddon_link.txt"
+  source       = "./images/armageddon_link.txt"
+  content_type = "text/plain"
+
+  etag = filemd5("./images/armageddon_link.txt")
+}
