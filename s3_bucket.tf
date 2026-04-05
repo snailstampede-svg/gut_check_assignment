@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "gut_checker_bucket" {
+resource "aws_s3_bucket" "gut-checker-bucket" {
   bucket = "tf-gut-checker-bucket"
   region = "us-east-1"
 
@@ -7,8 +7,8 @@ resource "aws_s3_bucket" "gut_checker_bucket" {
     Environment = "Dev"
   }
 }
-resource "aws_s3_bucket_public_access_block" "gut_checker_bucket_block" {
-  bucket = aws_s3_bucket.gut_checker_bucket.id
+resource "aws_s3_bucket_public_access_block" "gut-checker-bucket_block" {
+  bucket = aws_s3_bucket.gut-checker-bucket.id
 
   block_public_acls       = false
   block_public_policy     = false
@@ -17,9 +17,9 @@ resource "aws_s3_bucket_public_access_block" "gut_checker_bucket_block" {
 }
 
 resource "aws_s3_bucket_policy" "public_read" {
-  bucket = aws_s3_bucket.gut_checker_bucket.id
+  bucket = aws_s3_bucket.gut-checker-bucket.id
 
-  depends_on = [aws_s3_bucket_public_access_block.gut_checker_bucket_block]
+  depends_on = [aws_s3_bucket_public_access_block.gut-checker-bucket_block]
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -29,14 +29,14 @@ resource "aws_s3_bucket_policy" "public_read" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.gut_checker_bucket.arn}/*"
+        Resource  = "${aws_s3_bucket.gut-checker-bucket.arn}/*"
       }
     ]
   })
 }
 
 resource "aws_s3_object" "honey_badger" {
-  bucket       = aws_s3_bucket.gut_checker_bucket.id
+  bucket       = aws_s3_bucket.gut-checker-bucket.id
   key          = "honey_badger.jpg"
   source       = "./images/honey_badger.jpg"
   content_type = "image/jpeg"
@@ -44,7 +44,7 @@ resource "aws_s3_object" "honey_badger" {
   etag = filemd5("./images/honey_badger.jpg")
 }
 resource "aws_s3_object" "webhook_working" {
-  bucket       = aws_s3_bucket.gut_checker_bucket.id
+  bucket       = aws_s3_bucket.gut-checker-bucket.id
   key          = "1-working_webhook.png"
   source       = "./images/1-working_webhook.png"
   content_type = "image/png"
@@ -53,16 +53,16 @@ resource "aws_s3_object" "webhook_working" {
 }
 
 resource "aws_s3_object" "deploy_success" {
-  bucket       = aws_s3_bucket.gut_checker_bucket.id
-  key          = "deploy_success.jpg"
-  source       = "./images/deploy_success.jpg"
-  content_type = "image/jpeg"
+  bucket       = aws_s3_bucket.gut-checker-bucket.id
+  key          = "deploy_success.png"
+  source       = "./images/deploy_success.png"
+  content_type = "image/png"
 
-  etag = filemd5("./images/deploy_success.jpg")
+  etag = filemd5("./images/deploy_success.png")
 }
 
 resource "aws_s3_object" "pending_approval" {
-  bucket       = aws_s3_bucket.gut_checker_bucket.id
+  bucket       = aws_s3_bucket.gut-checker-bucket.id
   key          = "pending_approval.jpg"
   source       = "./images/pending_approval.jpg"
   content_type = "image/jpeg"
@@ -71,10 +71,10 @@ resource "aws_s3_object" "pending_approval" {
 }
 
 resource "aws_s3_object" "bucket_created" {
-  bucket       = aws_s3_bucket.gut_checker_bucket.id
-  key          = "bucket_created.jpg"
-  source       = "./images/bucket_created.jpg"
-  content_type = "image/jpeg"
+  bucket       = aws_s3_bucket.gut-checker-bucket.id
+  key          = "s3_bucket_created.png"
+  source       = "./images/s3_bucket_created.png"
+  content_type = "image/png"
 
-  etag = filemd5("./images/bucket_created.jpg")
+  etag = filemd5("./images/s3_bucket_created.png")
 }
