@@ -1,8 +1,7 @@
 resource "aws_s3_bucket" "gut-checker-bucket" {
-  bucket = "tf-gut-checker-bucket"
-  region = "us-east-1"
-
-  tags = {
+  bucket_prefix = "tf-gut-checker-bucket-"
+  
+    tags = {
     Name        = "Gut Check Assignment Bucket"
     Environment = "Dev"
   }
