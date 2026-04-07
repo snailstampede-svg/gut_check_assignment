@@ -101,3 +101,11 @@ resource "aws_s3_object" "armageddon_link" {
 
   etag = filemd5("./images/armageddon_link.txt")
 }
+resource "aws_s3_object" "bucket_contents" {
+  bucket       = aws_s3_bucket.gut-checker-bucket.id
+  key          = "bucket_contents.jpg"
+  source       = "./images/bucket_contents.jpg"
+  content_type = "image/jpeg"
+
+  etag = filemd5("./images/bucket_contents.jpg")
+}
